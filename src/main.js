@@ -2,6 +2,9 @@
 import './styles/index.css';
 import './styles/components.css';
 import './styles/auth.css';
+import './styles/dashboard.css';
+import './styles/transactions.css';
+import './styles/accounts.css';
 
 import { renderAppShell } from './app.js';
 import { registerRoute, setAuthGuard, initRouter } from './router.js';
@@ -13,6 +16,11 @@ import { renderLogin } from './pages/login.js';
 import { renderRegister } from './pages/register.js';
 import { renderForgotPassword } from './pages/forgot-password.js';
 import { renderResetPassword } from './pages/reset-password.js';
+import { renderDashboard } from './pages/dashboard.js';
+import { renderAddTransaction } from './pages/add-transaction.js';
+import { renderAccounts } from './pages/accounts.js';
+import { renderTransactions } from './pages/transactions.js';
+
 
 
 // 1. Render app shell (navbar + content area)
@@ -33,10 +41,10 @@ const comingSoon = (container) => {
   `;
 };
 
-registerRoute('/dashboard', comingSoon);
-registerRoute('/accounts', comingSoon);
-registerRoute('/transactions', comingSoon);
-registerRoute('/add-transaction', comingSoon);
+registerRoute('/dashboard', renderDashboard);
+registerRoute('/accounts', renderAccounts)
+registerRoute('/transactions', renderTransactions);
+registerRoute('/add-transaction', renderAddTransaction);
 registerRoute('/categories', comingSoon);
 registerRoute('/profile', comingSoon);
 registerRoute('/forgot-password', renderForgotPassword);

@@ -1,0 +1,240 @@
+/* ============================================
+   TRANSACTIONS - Add & List
+   ============================================ */
+
+/* --- Type Toggle (Income/Expense/Transfer) --- */
+.type-toggle {
+    display: flex;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: 4px;
+    margin-bottom: var(--space-lg);
+}
+
+.type-toggle-btn {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.type-toggle-btn.active {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.type-toggle-btn.active[data-type="income"] {
+    color: var(--color-income);
+}
+
+.type-toggle-btn.active[data-type="expense"] {
+    color: var(--color-expense);
+}
+
+.type-toggle-btn.active[data-type="transfer"] {
+    color: var(--color-transfer);
+}
+
+/* --- Amount Input --- */
+.amount-display {
+    text-align: center;
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-md);
+}
+
+.amount-prefix {
+    font-size: var(--font-lg);
+    color: var(--text-secondary);
+    margin-right: var(--space-xs);
+}
+
+.amount-value {
+    font-size: 40px;
+    font-weight: 700;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    text-align: center;
+    width: 100%;
+    font-family: var(--font-family);
+    outline: none;
+}
+
+.amount-value::placeholder {
+    color: var(--text-muted);
+}
+
+/* --- Category Grid --- */
+.category-section {
+    margin-bottom: var(--space-lg);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-md) var(--space-sm);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.category-item:hover {
+    border-color: var(--border-light);
+}
+
+.category-item.selected {
+    border-color: var(--accent);
+    background: var(--bg-tertiary);
+}
+
+.category-item-icon {
+    font-size: 24px;
+}
+
+.category-item-name {
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* --- Account Selector --- */
+.account-selector {
+    margin-bottom: var(--space-lg);
+}
+
+.account-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.account-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.account-option:hover {
+    border-color: var(--border-light);
+}
+
+.account-option.selected {
+    border-color: var(--accent);
+    background: var(--bg-tertiary);
+}
+
+.account-option-icon {
+    font-size: 24px;
+}
+
+.account-option-info {
+    flex: 1;
+}
+
+.account-option-name {
+    font-size: var(--font-sm);
+    font-weight: 500;
+}
+
+.account-option-balance {
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+}
+
+/* --- Form add transaction --- */
+.add-tx-page {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--navbar-height) + var(--space-lg));
+    animation: fadeIn var(--transition-normal);
+}
+
+.add-tx-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.add-tx-title {
+    font-size: var(--font-lg);
+    font-weight: 600;
+}
+
+/* --- Transaction List Page --- */
+.tx-list-page {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--navbar-height) + var(--space-lg));
+    animation: fadeIn var(--transition-normal);
+}
+
+.tx-filters {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tx-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-chip {
+    flex-shrink: 0;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: var(--font-xs);
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-chip.active {
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-color: var(--accent);
+}
+
+.tx-date-group {
+    margin-bottom: var(--space-md);
+}
+
+.tx-date-label {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-sm);
+    padding: 0 var(--space-xs);
+}

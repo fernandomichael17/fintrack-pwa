@@ -1,0 +1,272 @@
+/* ============================================
+   DASHBOARD - Home Page
+   ============================================ */
+
+.dashboard {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--navbar-height) + var(--space-lg));
+    animation: fadeIn var(--transition-normal);
+}
+
+/* --- Header --- */
+.dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.dash-greeting h2 {
+    font-size: var(--font-lg);
+    font-weight: 600;
+}
+
+.dash-greeting p {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* --- Total Balance Card --- */
+.balance-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.balance-label {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+.balance-amount {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* --- Income / Expense Summary --- */
+.summary-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.summary-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+}
+
+.summary-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.summary-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-sm);
+}
+
+.summary-icon.income {
+    background: var(--color-income-bg);
+    color: var(--color-income);
+}
+
+.summary-icon.expense {
+    background: var(--color-expense-bg);
+    color: var(--color-expense);
+}
+
+.summary-card-header span {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.summary-amount {
+    font-size: var(--font-lg);
+    font-weight: 600;
+}
+
+.summary-amount.income {
+    color: var(--color-income);
+}
+
+.summary-amount.expense {
+    color: var(--color-expense);
+}
+
+/* --- Accounts Horizontal Scroll --- */
+.accounts-section {
+    margin-bottom: var(--space-lg);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.section-title {
+    font-size: var(--font-md);
+    font-weight: 600;
+}
+
+.section-link {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.accounts-scroll {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    padding-bottom: var(--space-sm);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.accounts-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.account-chip {
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    min-width: 140px;
+}
+
+.account-chip-icon {
+    font-size: 20px;
+    margin-bottom: var(--space-sm);
+}
+
+.account-chip-name {
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+}
+
+.account-chip-balance {
+    font-size: var(--font-md);
+    font-weight: 600;
+}
+
+/* --- Month Selector --- */
+.month-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.month-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    font-size: var(--font-md);
+}
+
+.month-btn:hover {
+    background: var(--border-color);
+}
+
+.month-label {
+    font-size: var(--font-md);
+    font-weight: 500;
+    min-width: 140px;
+    text-align: center;
+}
+
+/* --- Recent Transactions --- */
+.recent-transactions {
+    margin-bottom: var(--space-lg);
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-lg);
+    flex-shrink: 0;
+}
+
+.transaction-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.transaction-name {
+    font-size: var(--font-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.transaction-meta {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.transaction-amount {
+    font-size: var(--font-sm);
+    font-weight: 600;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.transaction-amount.income {
+    color: var(--color-income);
+}
+
+.transaction-amount.expense {
+    color: var(--color-expense);
+}
+
+.transaction-amount.transfer {
+    color: var(--color-transfer);
+}

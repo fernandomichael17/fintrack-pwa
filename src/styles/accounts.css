@@ -1,0 +1,169 @@
+/* ============================================
+   ACCOUNTS - Bank, E-Wallet, Cash
+   ============================================ */
+
+.accounts-page {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--navbar-height) + var(--space-lg));
+    animation: fadeIn var(--transition-normal);
+}
+
+.accounts-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.accounts-page-header h2 {
+    font-size: var(--font-lg);
+    font-weight: 600;
+}
+
+/* --- Total Balance --- */
+.accounts-total {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.accounts-total-label {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+.accounts-total-amount {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+}
+
+/* --- Account List --- */
+.account-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.account-list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.account-list-item:hover {
+    border-color: var(--border-light);
+}
+
+.account-list-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.account-list-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.account-list-name {
+    font-size: var(--font-md);
+    font-weight: 500;
+}
+
+.account-list-type {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.account-list-balance {
+    font-size: var(--font-md);
+    font-weight: 600;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.account-list-actions {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.account-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-sm);
+    transition: all var(--transition-fast);
+}
+
+.account-action-btn:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.account-action-btn.delete:hover {
+    background: var(--color-expense-bg);
+    color: var(--color-expense);
+}
+
+/* --- Add Account Form (Modal) --- */
+.add-account-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.type-select-group {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.type-select-btn {
+    flex: 1;
+    padding: var(--space-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.type-select-btn.selected {
+    border-color: var(--accent);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+}
+
+.type-select-icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: var(--space-xs);
+}
