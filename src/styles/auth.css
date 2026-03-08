@@ -1,0 +1,123 @@
+/* ============================================
+   AUTH - Login, Register, Forgot/Reset Password
+   ============================================ */
+
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--space-lg);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.auth-logo {
+    font-size: 40px;
+    margin-bottom: var(--space-sm);
+}
+
+.auth-header h1 {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+}
+
+.auth-header p {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.auth-form .input-group {
+    gap: var(--space-sm);
+}
+
+.auth-submit {
+    margin-top: var(--space-sm);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.auth-footer a {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.auth-link {
+    text-align: right;
+    margin-top: calc(-1 * var(--space-sm));
+}
+
+.auth-link a {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.auth-link a:hover {
+    color: var(--text-primary);
+}
+
+/* Success message setelah register/forgot password */
+.auth-success {
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+.auth-success-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-md);
+}
+
+.auth-success h2 {
+    margin-bottom: var(--space-sm);
+}
+
+.auth-success p {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+/* Password visibility toggle */
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: var(--space-xs);
+    font-size: var(--font-sm);
+}
+
+.password-toggle:hover {
+    color: var(--text-primary);
+}
+
+/* Error text */
+.error-text {
+    color: var(--color-expense);
+    font-size: var(--font-xs);
+    margin-top: var(--space-xs);
+}
