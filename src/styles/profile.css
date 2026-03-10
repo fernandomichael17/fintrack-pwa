@@ -1,0 +1,135 @@
+/* ============================================
+   PROFILE - User Settings
+   ============================================ */
+
+.profile-page {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--navbar-height) + var(--space-lg));
+    animation: fadeIn var(--transition-normal);
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-lg);
+}
+
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: var(--space-md);
+}
+
+.profile-name {
+    font-size: var(--font-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.profile-email {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+/* --- Menu List --- */
+.profile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+}
+
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-menu-item:last-child {
+    border-bottom: none;
+}
+
+.profile-menu-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.profile-menu-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.profile-menu-text {
+    flex: 1;
+}
+
+.profile-menu-label {
+    font-size: var(--font-sm);
+    font-weight: 500;
+}
+
+.profile-menu-desc {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.profile-menu-arrow {
+    color: var(--text-muted);
+    font-size: var(--font-sm);
+}
+
+/* --- Logout Button --- */
+.logout-section {
+    margin-top: var(--space-lg);
+}
+
+.btn-logout {
+    width: 100%;
+    padding: var(--space-md);
+    background: transparent;
+    border: 1px solid var(--color-expense);
+    border-radius: var(--radius-md);
+    color: var(--color-expense);
+    font-family: var(--font-family);
+    font-size: var(--font-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-logout:hover {
+    background: var(--color-expense-bg);
+}
+
+/* --- App Info --- */
+.app-info {
+    text-align: center;
+    margin-top: var(--space-lg);
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+}
