@@ -1,6 +1,9 @@
 import { login } from '../services/auth.service.js';
 import { navigateTo } from '../router.js';
 import { showToast } from '../components/toast.js';
+import { createRateLimiter, formatRemainingTime } from '../utils/sanitize.js';
+
+const loginLimiter = createRateLimiter(5, 15 * 60 * 1000);
 
 export function renderLogin(container) {
     container.innerHTML = `
@@ -79,11 +82,18 @@ export function renderLogin(container) {
             return;
         }
 
+        const { allowed, remainingMs } = loginLimiter.check();
+        if (!allowed) {
+            showToast(`Terlalu banyak percobaan login. Coba lagi dalam ${formatRemainingTime(remainingMs)}`, 'error');
+            return;
+        }
+
         loginBtn.disabled = true;
         loginBtn.innerHTML = '<div class="spinner"></div>';
 
         try {
             await login(email, password);
+            loginLimiter.reset();
             showToast('Login berhasil!', 'success');
             navigateTo('/dashboard');
         } catch (error) {

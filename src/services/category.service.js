@@ -2,6 +2,7 @@ import db from '../db/local.js';
 import { supabase } from '../config/supabase.js';
 import { getOnlineStatus } from '../db/sync.js';
 import { getCurrentUser } from './auth.service.js';
+import { sanitizeInput } from '../utils/sanitize.js';
 
 export async function getCategories(type = null) {
     const user = await getCurrentUser();
@@ -25,10 +26,13 @@ export async function addCategory(data) {
     const user = await getCurrentUser();
     if (!user) throw new Error('Not authenticated');
 
+    const name = sanitizeInput(data.name, 50);
+    if (!name) throw new Error('Nama kategori wajib diisi');
+
     const category = {
         id: crypto.randomUUID(),
         user_id: user.id,
-        name: data.name,
+        name: name,
         type: data.type,
         icon: data.icon || '📌',
         is_default: false,

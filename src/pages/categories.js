@@ -1,6 +1,7 @@
 import { getCategories, addCategory, updateCategory, deleteCategory } from '../services/category.service.js';
 import { showToast } from '../components/toast.js';
 import { navigateTo } from '../router.js';
+import { escapeHtml } from '../utils/sanitize.js';
 
 let activeTab = 'expense';
 
@@ -41,7 +42,7 @@ async function renderContent(container) {
           ${categories.map(cat => `
             <div class="category-list-item">
               <div class="category-list-icon">${cat.icon || '📌'}</div>
-              <div class="category-list-name">${cat.name}</div>
+              <div class="category-list-name">${escapeHtml(cat.name)}</div>
               ${cat.is_default ? '<span class="category-list-badge">Default</span>' : ''}
               ${!cat.is_default ? `
                 <div class="category-list-actions">
@@ -110,7 +111,7 @@ function showCategoryModal(container, editCategory = null) {
         <div class="add-account-form">
           <div class="input-group">
             <label for="cat-name">Nama Kategori</label>
-            <input type="text" id="cat-name" class="input-field" placeholder="Contoh: Investasi" value="${editCategory?.name || ''}" />
+            <input type="text" id="cat-name" class="input-field" placeholder="Contoh: Investasi" value="${escapeHtml(editCategory?.name || '')}" maxlength="50" />
           </div>
 
           <div class="input-group">

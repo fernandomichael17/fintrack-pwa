@@ -2,6 +2,7 @@ import { getTransactions, deleteTransaction } from '../services/transaction.serv
 import { getCategoryById } from '../services/category.service.js';
 import { getAccountById } from '../services/account.service.js';
 import { showToast } from '../components/toast.js';
+import { escapeHtml } from '../utils/sanitize.js';
 
 function formatRupiah(amount) {
     return new Intl.NumberFormat('id-ID', {
@@ -133,17 +134,17 @@ async function renderItems(transactions) {
 
         if (t.type === 'transfer') {
             name = 'Transfer';
-            meta = `${account?.name || '?'} → ${toAccount?.name || '?'}`;
+            meta = `${escapeHtml(account?.name) || '?'} → ${escapeHtml(toAccount?.name) || '?'}`;
         }
 
         const prefix = t.type === 'income' ? '+' : t.type === 'expense' ? '-' : '';
 
         return `
-      <div class="transaction-item" data-tx-id="${t.id}">
+      <div class="transaction-item" data-tx-id="${escapeHtml(t.id)}">
         <div class="transaction-icon">${icon}</div>
         <div class="transaction-info">
-          <div class="transaction-name">${name}${t.note ? ' • ' + t.note : ''}</div>
-          <div class="transaction-meta">${meta}</div>
+          <div class="transaction-name">${escapeHtml(name)}${t.note ? ' • ' + escapeHtml(t.note) : ''}</div>
+          <div class="transaction-meta">${escapeHtml(meta)}</div>
         </div>
         <div class="transaction-amount ${t.type}">${prefix}${formatRupiah(t.amount)}</div>
       </div>

@@ -3,6 +3,7 @@ import { getAccounts } from '../services/account.service.js';
 import { getCategories } from '../services/category.service.js';
 import { navigateTo } from '../router.js';
 import { showToast } from '../components/toast.js';
+import { escapeHtml } from '../utils/sanitize.js';
 
 // Format Rupiah untuk display
 function formatRupiah(num) {
@@ -59,7 +60,7 @@ export async function renderAddTransaction(container) {
               <div class="account-option ${selectedAccountId === acc.id ? 'selected' : ''}" data-account-id="${acc.id}">
                 <span class="account-option-icon">${acc.icon || '🏦'}</span>
                 <div class="account-option-info">
-                  <div class="account-option-name">${acc.name}</div>
+                  <div class="account-option-name">${escapeHtml(acc.name)}</div>
                   <div class="account-option-balance">${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(acc.balance)}</div>
                 </div>
               </div>
@@ -79,7 +80,7 @@ export async function renderAddTransaction(container) {
                 <div class="account-option ${selectedToAccountId === acc.id ? 'selected' : ''}" data-to-account-id="${acc.id}">
                   <span class="account-option-icon">${acc.icon || '🏦'}</span>
                   <div class="account-option-info">
-                    <div class="account-option-name">${acc.name}</div>
+                    <div class="account-option-name">${escapeHtml(acc.name)}</div>
                     <div class="account-option-balance">${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(acc.balance)}</div>
                   </div>
                 </div>
@@ -98,7 +99,7 @@ export async function renderAddTransaction(container) {
               ${categories.map(cat => `
                 <div class="category-item ${selectedCategoryId === cat.id ? 'selected' : ''}" data-category-id="${cat.id}">
                   <span class="category-item-icon">${cat.icon || '📌'}</span>
-                  <span class="category-item-name">${cat.name}</span>
+                  <span class="category-item-name">${escapeHtml(cat.name)}</span>
                 </div>
               `).join('')}
               ${categories.length === 0 ? '<p style="grid-column: 1/-1; color: var(--text-muted); font-size: var(--font-sm); text-align: center;">Tidak ada kategori</p>' : ''}
@@ -114,7 +115,7 @@ export async function renderAddTransaction(container) {
 
         <div class="input-group" style="margin-bottom: var(--space-lg);">
           <label for="tx-note">Catatan (opsional)</label>
-          <input type="text" id="tx-note" class="input-field" placeholder="Contoh: Makan siang di warteg" />
+          <input type="text" id="tx-note" class="input-field" placeholder="Contoh: Makan siang di warteg" maxlength="100" />
         </div>
 
         <!-- Submit -->
@@ -187,6 +188,11 @@ export async function renderAddTransaction(container) {
         // Validasi
         if (amount <= 0) {
             showToast('Masukkan jumlah transaksi', 'error');
+            return;
+        }
+
+        if (amount > 999999999999) {
+            showToast('Jumlah transaksi terlalu besar (maks Rp 999.999.999.999)', 'error');
             return;
         }
 

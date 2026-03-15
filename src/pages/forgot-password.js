@@ -1,5 +1,8 @@
 import { forgotPassword } from '../services/auth.service.js';
 import { showToast } from '../components/toast.js';
+import { escapeHtml, createRateLimiter, formatRemainingTime } from '../utils/sanitize.js';
+
+const forgotLimiter = createRateLimiter(3, 15 * 60 * 1000);
 
 export function renderForgotPassword(container) {
     container.innerHTML = `
@@ -50,6 +53,14 @@ export function renderForgotPassword(container) {
         forgotBtn.disabled = true;
         forgotBtn.innerHTML = '<div class="spinner"></div>';
 
+        const { allowed, remainingMs } = forgotLimiter.check();
+        if (!allowed) {
+            showToast(`Terlalu banyak percobaan. Coba lagi dalam ${formatRemainingTime(remainingMs)}`, 'error');
+            forgotBtn.disabled = false;
+            forgotBtn.textContent = 'Kirim Link Reset';
+            return;
+        }
+
         try {
             await forgotPassword(email);
 
@@ -58,7 +69,7 @@ export function renderForgotPassword(container) {
           <div class="auth-success">
             <div class="auth-success-icon">📧</div>
             <h2>Email Terkirim</h2>
-            <p>Link reset password telah dikirim ke <strong>${email}</strong>. Cek inbox atau folder spam Anda.</p>
+            <p>Link reset password telah dikirim ke <strong>${escapeHtml(email)}</strong>. Cek inbox atau folder spam Anda.</p>
             <a href="#/login" class="btn btn-primary">Kembali ke Login</a>
           </div>
         </div>

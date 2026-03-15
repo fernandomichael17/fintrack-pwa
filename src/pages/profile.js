@@ -2,6 +2,7 @@ import { getCurrentUser, logout } from '../services/auth.service.js';
 import { getProfile, updateProfile } from '../services/profile.service.js';
 import { navigateTo } from '../router.js';
 import { showToast } from '../components/toast.js';
+import { escapeHtml } from '../utils/sanitize.js';
 
 export async function renderProfile(container) {
     container.innerHTML = `<div class="profile-page"><div style="display:flex;justify-content:center;padding-top:100px;"><div class="spinner"></div></div></div>`;
@@ -16,9 +17,9 @@ export async function renderProfile(container) {
         container.innerHTML = `
       <div class="profile-page">
         <div class="profile-header">
-          <div class="profile-avatar">${initial}</div>
-          <div class="profile-name" id="display-name">${displayName}</div>
-          <div class="profile-email">${email}</div>
+          <div class="profile-avatar">${escapeHtml(initial)}</div>
+          <div class="profile-name" id="display-name">${escapeHtml(displayName)}</div>
+          <div class="profile-email">${escapeHtml(email)}</div>
         </div>
 
         <!-- Menu -->
@@ -86,7 +87,7 @@ function showEditName(container, userId, currentName) {
       </div>
       <div class="input-group" style="margin-bottom: var(--space-lg);">
         <label for="edit-display-name">Nama Tampilan</label>
-        <input type="text" id="edit-display-name" class="input-field" value="${currentName}" />
+        <input type="text" id="edit-display-name" class="input-field" value="${escapeHtml(currentName)}" maxlength="50" />
       </div>
       <button class="btn btn-primary" id="save-name-btn">Simpan</button>
     </div>

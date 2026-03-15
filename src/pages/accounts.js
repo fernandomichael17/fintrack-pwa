@@ -1,5 +1,6 @@
 import { getAccounts, addAccount, updateAccount, deleteAccount, getTotalBalance } from '../services/account.service.js';
 import { showToast } from '../components/toast.js';
+import { escapeHtml } from '../utils/sanitize.js';
 
 function formatRupiah(amount) {
     return new Intl.NumberFormat('id-ID', {
@@ -42,8 +43,8 @@ async function renderContent(container) {
             <div class="account-list-item" data-id="${acc.id}">
               <div class="account-list-icon">${acc.icon || '🏦'}</div>
               <div class="account-list-info">
-                <div class="account-list-name">${acc.name}</div>
-                <div class="account-list-type">${typeLabels[acc.type] || acc.type}${acc.holder_name ? ' • ' + acc.holder_name : ''}</div>
+                <div class="account-list-name">${escapeHtml(acc.name)}</div>
+                <div class="account-list-type">${typeLabels[acc.type] || escapeHtml(acc.type)}${acc.holder_name ? ' • ' + escapeHtml(acc.holder_name) : ''}</div>
               </div>
               <div class="account-list-balance">${formatRupiah(acc.balance)}</div>
               <div class="account-list-actions">
@@ -121,12 +122,12 @@ function showAccountModal(container, editAccount = null) {
 
           <div class="input-group">
             <label for="account-name">Nama Akun</label>
-            <input type="text" id="account-name" class="input-field" placeholder="Contoh: BCA, Dana, GoPay" value="${editAccount?.name || ''}" />
+            <input type="text" id="account-name" class="input-field" placeholder="Contoh: BCA, Dana, GoPay" value="${escapeHtml(editAccount?.name || '')}" maxlength="50" />
           </div>
 
           <div class="input-group">
             <label for="account-holder">Nama Pemilik (opsional)</label>
-            <input type="text" id="account-holder" class="input-field" placeholder="Nama pemilik rekening" value="${editAccount?.holder_name || ''}" />
+            <input type="text" id="account-holder" class="input-field" placeholder="Nama pemilik rekening" value="${escapeHtml(editAccount?.holder_name || '')}" maxlength="50" />
           </div>
 
           ${!isEdit ? `

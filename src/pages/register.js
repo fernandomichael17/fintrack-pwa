@@ -1,6 +1,9 @@
 import { register } from '../services/auth.service.js';
 import { navigateTo } from '../router.js';
 import { showToast } from '../components/toast.js';
+import { escapeHtml, createRateLimiter, formatRemainingTime } from '../utils/sanitize.js';
+
+const registerLimiter = createRateLimiter(3, 15 * 60 * 1000);
 
 export function renderRegister(container) {
     container.innerHTML = `
@@ -21,6 +24,7 @@ export function renderRegister(container) {
             placeholder="Nama lengkap"
             required
             autocomplete="name"
+            maxlength="50"
           />
         </div>
 
@@ -116,6 +120,12 @@ export function renderRegister(container) {
             return;
         }
 
+        const { allowed, remainingMs } = registerLimiter.check();
+        if (!allowed) {
+            showToast(`Terlalu banyak percobaan. Coba lagi dalam ${formatRemainingTime(remainingMs)}`, 'error');
+            return;
+        }
+
         registerBtn.disabled = true;
         registerBtn.innerHTML = '<div class="spinner"></div>';
 
@@ -128,7 +138,7 @@ export function renderRegister(container) {
           <div class="auth-success">
             <div class="auth-success-icon">✉️</div>
             <h2>Cek Email Anda</h2>
-            <p>Kami telah mengirimkan link verifikasi ke <strong>${email}</strong>. Klik link tersebut untuk mengaktifkan akun Anda.</p>
+            <p>Kami telah mengirimkan link verifikasi ke <strong>${escapeHtml(email)}</strong>. Klik link tersebut untuk mengaktifkan akun Anda.</p>
             <a href="#/login" class="btn btn-primary">Kembali ke Login</a>
           </div>
         </div>

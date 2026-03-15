@@ -2,6 +2,7 @@ import db from '../db/local.js';
 import { supabase } from '../config/supabase.js';
 import { getOnlineStatus } from '../db/sync.js';
 import { getCurrentUser } from './auth.service.js';
+import { sanitizeInput } from '../utils/sanitize.js';
 
 export async function getAccounts() {
     const user = await getCurrentUser();
@@ -22,12 +23,15 @@ export async function addAccount(data) {
     const user = await getCurrentUser();
     if (!user) throw new Error('Not authenticated');
 
+    const name = sanitizeInput(data.name, 50);
+    if (!name) throw new Error('Nama akun wajib diisi');
+
     const account = {
         id: crypto.randomUUID(),
         user_id: user.id,
-        name: data.name,
+        name: name,
         type: data.type,
-        holder_name: data.holder_name || null,
+        holder_name: data.holder_name ? sanitizeInput(data.holder_name, 50) : null,
         balance: data.balance || 0,
         icon: data.icon || '🏦',
         created_at: new Date().toISOString(),

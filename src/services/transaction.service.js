@@ -3,10 +3,21 @@ import { supabase } from '../config/supabase.js';
 import { getOnlineStatus } from '../db/sync.js';
 import { getCurrentUser } from './auth.service.js';
 import { updateBalance } from './account.service.js';
+import { validateTransactionType, validateAmount, sanitizeInput } from '../utils/sanitize.js';
 
 export async function addTransaction(data) {
     const user = await getCurrentUser();
     if (!user) throw new Error('Not authenticated');
+
+    // Validasi tipe transaksi (whitelist)
+    if (!validateTransactionType(data.type)) {
+        throw new Error('Tipe transaksi tidak valid');
+    }
+
+    // Validasi jumlah transaksi
+    if (!validateAmount(data.amount)) {
+        throw new Error('Jumlah transaksi tidak valid');
+    }
 
     const transaction = {
         id: crypto.randomUUID(),
@@ -16,7 +27,7 @@ export async function addTransaction(data) {
         to_account_id: data.to_account_id || null,
         type: data.type,
         amount: data.amount,
-        note: data.note || '',
+        note: sanitizeInput(data.note || '', 100),
         date: data.date || new Date().toISOString().split('T')[0],
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),

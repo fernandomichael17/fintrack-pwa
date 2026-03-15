@@ -5,6 +5,7 @@ import { getProfile } from '../services/profile.service.js';
 import { getCurrentUser } from '../services/auth.service.js';
 import { getOnlineStatus } from '../db/sync.js';
 import { navigateTo } from '../router.js';
+import { escapeHtml } from '../utils/sanitize.js';
 
 // Format angka ke Rupiah
 function formatRupiah(amount) {
@@ -76,7 +77,7 @@ async function renderContent(container, displayName) {
       <!-- Header -->
       <div class="dash-header">
         <div class="dash-greeting">
-          <h2>Halo, ${displayName} 👋</h2>
+          <h2>Halo, ${escapeHtml(displayName)} 👋</h2>
           <p>${formatDate(new Date())} • <span class="sync-badge ${isOnline ? 'online' : 'offline'}"><span class="sync-dot"></span> ${isOnline ? 'Online' : 'Offline'}</span></p>
         </div>
       </div>
@@ -116,7 +117,7 @@ async function renderContent(container, displayName) {
             ${accounts.map(acc => `
               <div class="account-chip">
                 <div class="account-chip-icon">${acc.icon || '🏦'}</div>
-                <div class="account-chip-name">${acc.name}</div>
+                <div class="account-chip-name">${escapeHtml(acc.name)}</div>
                 <div class="account-chip-balance">${formatRupiah(acc.balance)}</div>
               </div>
             `).join('')}
@@ -177,7 +178,7 @@ async function renderTransactionItems(transactions) {
       <div class="transaction-item">
         <div class="transaction-icon">${icon}</div>
         <div class="transaction-info">
-          <div class="transaction-name">${name}${t.note ? ' • ' + t.note : ''}</div>
+          <div class="transaction-name">${escapeHtml(name)}${t.note ? ' • ' + escapeHtml(t.note) : ''}</div>
           <div class="transaction-meta">${formatDate(t.date)}</div>
         </div>
         <div class="transaction-amount ${t.type}">${prefix}${formatRupiah(t.amount)}</div>
